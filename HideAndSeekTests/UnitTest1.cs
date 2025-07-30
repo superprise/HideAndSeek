@@ -15,7 +15,24 @@ namespace HideAndSeekTests
         [TestInitialize]
         public void Initialize()
         {
+            center = new Location("Center Room");
+            Assert.AreSame("Center Room", center.ToString());
+            Assert.AreEqual(0, center.ExitList.Count());
+            center.AddExit(Direction.North, new Location("North Room"));
+            center.AddExit(Direction.South, new Location("South Room"));
+            center.AddExit(Direction.West, new Location("West Room"));
+            center.AddExit(Direction.East, new Location("East Room"));
+            center.AddExit(Direction.Northeast, new Location("NorthWest Room"));
+            center.AddExit(Direction.Northwest, new Location("NorthEast Room"));
+            center.AddExit(Direction.Southwest, new Location("SouthWest Room"));
+            center.AddExit(Direction.Southeast, new Location("SouthEast Room"));
+            center.AddExit(Direction.Up, new Location("Upper Room"));
+            center.AddExit(Direction.Down, new Location("Downer Room"));
+            //center.AddExit(Direction.In, new Location("inside Room"));
+            //center.AddExit(Direction.Out, new Location("Outside Room"));
             // You'll use this to create a bunch of locations before each test
+
+            Assert.AreEqual(10, center.ExitList.Count());
         }
         /// <summary>
         /// Make sure GetExit returns the location in a direction only if it exists
@@ -23,6 +40,10 @@ namespace HideAndSeekTests
         [TestMethod]
         public void TestGetExit()
         {
+            var eastRoom = center.GetExit(Direction.East);
+            Assert.AreEqual("East Room", eastRoom.Name);
+            Assert.AreSame(center, eastRoom.GetExit(Direction.West));
+            Assert.AreSame(eastRoom, eastRoom.GetExit(Direction.Up));
             // This test will make sure the GetExit method works
         }
         /// <summary>
