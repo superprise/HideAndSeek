@@ -30,7 +30,8 @@ namespace HideAndSeek
         /// </summary>
         public IEnumerable<string> ExitList => from exit in Exits
                                                orderby Exits.Values 
-                                               select "the " + exit.Value.ToString() + " is to the " + exit.Key.ToString();
+                                               select "the " + exit.Value.ToString()
+                                               + " is to the " + exit.Key.ToString();
         /// <summary>
         /// Adds an exit to this location
         /// </summary>
@@ -40,11 +41,12 @@ namespace HideAndSeek
         {
             Exits.Add((Direction)((int)direction), connectingLocation);
 
-            //ExitList.Append("the "+connectingLocation+" is to the "+direction);
+           connectingLocation. AddReturnExit(direction, this  );
+
+
             //Debug.Write("ок "+ direction.ToString() +" "+ connectingLocation );
-            //AddReturnExit(direction, connectingLocation);
-            foreach (var dir in ExitList) { Debug.WriteLine(dir.ToString()); }
-                Debug.WriteLine(ExitList.Count());
+            //foreach (var dir in ExitList) { Debug.WriteLine(dir.ToString()); }
+            Debug.WriteLine(ExitList.Count());
             //}
         }
         private void AddReturnExit(Direction direction, Location connectingLocation) =>
@@ -56,11 +58,13 @@ namespace HideAndSeek
         /// <returns>The exit location, or this if there is no exit in that direction</returns>
         public Location GetExit(Direction direction)
         {
+
+            ///тут все не правильно
             if (Exits.ContainsKey(direction))
             {
                 return Exits[direction];
             }
-            else return new Location("TESTING"); ;
+            else return this;
 
 
         }

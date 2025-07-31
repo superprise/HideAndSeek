@@ -8,26 +8,33 @@ namespace HideAndSeekTests
     public class LocationTests
     {
         private Location center;
+        public Location eastRoom;
+        public Location Hall;
+        public Location Sralnya;
         /// <summary>
         /// Initializes each unit test by setting creating a new the center location
         /// and adding a room in each direction before the test
         /// </summary>
         [TestInitialize]
         public void Initialize()
-        {
+        {   eastRoom = new Location("East Room");
             center = new Location("Center Room");
+            Hall = new Location("Hall");
+            Sralnya = new Location("ya Sdes Sral");
             Assert.AreSame("Center Room", center.ToString());
             Assert.AreEqual(0, center.ExitList.Count());
             center.AddExit(Direction.North, new Location("North Room"));
             center.AddExit(Direction.South, new Location("South Room"));
             center.AddExit(Direction.West, new Location("West Room"));
-            center.AddExit(Direction.East, new Location("East Room"));
+            center.AddExit(Direction.East, eastRoom );
             center.AddExit(Direction.Northeast, new Location("NorthWest Room"));
             center.AddExit(Direction.Northwest, new Location("NorthEast Room"));
             center.AddExit(Direction.Southwest, new Location("SouthWest Room"));
             center.AddExit(Direction.Southeast, new Location("SouthEast Room"));
             center.AddExit(Direction.Up, new Location("Upper Room"));
             center.AddExit(Direction.Down, new Location("Downer Room"));
+            eastRoom.AddExit(Direction.East, Hall);
+            Hall.AddExit(Direction.East, Sralnya);
             //center.AddExit(Direction.In, new Location("inside Room"));
             //center.AddExit(Direction.Out, new Location("Outside Room"));
             // You'll use this to create a bunch of locations before each test
@@ -69,6 +76,9 @@ namespace HideAndSeekTests
         [TestMethod]
         public void TestAddHall()
         {
+            Assert.AreEqual(2, Hall.ExitList.Count());
+            Assert.AreEqual(2, eastRoom.ExitList.Count());
+            Assert.AreEqual(1, Sralnya.ExitList.Count());
             // This test will add a hallway with two locations and make sure they work
         }
     }
