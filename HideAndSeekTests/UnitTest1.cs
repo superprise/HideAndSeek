@@ -3,6 +3,7 @@ namespace HideAndSeekTests
 {
     using HideAndSeek;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     [TestClass]
     public class LocationTests
@@ -40,6 +41,10 @@ namespace HideAndSeekTests
             // You'll use this to create a bunch of locations before each test
 
             Assert.AreEqual(10, center.ExitList.Count());
+            foreach (var dir in center.ExitList)
+            {
+                Debug.WriteLine(dir.ToString());
+            }
         }
         /// <summary>
         /// Make sure GetExit returns the location in a direction only if it exists

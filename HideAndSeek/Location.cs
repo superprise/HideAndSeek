@@ -28,10 +28,15 @@ namespace HideAndSeek
         /// <summary>
         /// Returns a sequence of descriptions of the exits, sorted by direction
         /// </summary>
-        public IEnumerable<string> ExitList => from exit in Exits
-                                               orderby Exits.Values 
-                                               select "the " + exit.Value.ToString()
-                                               + " is to the " + exit.Key.ToString();
+        public IEnumerable<string> ExitList => Exits
+            .OrderBy(keyValuePair => (int)keyValuePair.Key)
+            .OrderBy(keyValuePair => Math.Abs((int)keyValuePair.Key))
+            .Select(keyValuePair => $" - the {keyValuePair.Value} is {DescribeDirection(keyValuePair.Key)}");
+
+        //from exit in Exits
+        //                                   orderby exit.Key
+        //                                   select " - the " + exit.Value.ToString()
+        //                                   + " is "+ DescribeDirection(exit.Key) ;
         /// <summary>
         /// Adds an exit to this location
         /// </summary>
@@ -45,8 +50,8 @@ namespace HideAndSeek
 
 
             //Debug.Write("ок "+ direction.ToString() +" "+ connectingLocation );
-            //foreach (var dir in ExitList) { Debug.WriteLine(dir.ToString()); }
-            Debug.WriteLine(ExitList.Count());
+           
+            //Debug.WriteLine(ExitList.Count());
             //}
         }
         private void AddReturnExit(Direction direction, Location connectingLocation) =>
