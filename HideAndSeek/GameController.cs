@@ -22,7 +22,7 @@ namespace HideAndSeek
         public string Prompt => "Which direction do you want to go: ";
         public GameController()
         {
-            //CurrentLocation = House.Entry;
+            CurrentLocation = House.Entry;
         }
         /// <summary>
         /// Move to the location in a direction

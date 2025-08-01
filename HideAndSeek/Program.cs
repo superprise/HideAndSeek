@@ -12,7 +12,7 @@
                 Console.Write(gameController.Prompt);
                 Console.WriteLine(gameController.ParseInput(Console.ReadLine()));
             }
-            Console.WriteLine("Hello, World!");
+         
         }
     }
 }
