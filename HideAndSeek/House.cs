@@ -8,6 +8,7 @@ namespace HideAndSeek
 {
     static public class House
     {
+        public static Random Random;//stub
         static House()
         { 
             Location Hallway=new Location("Hallway");
@@ -27,8 +28,12 @@ namespace HideAndSeek
             Landing.AddExit(Direction.South, new Location("Pantry"));
             Landing.AddExit(Direction.Southeast, new Location("Kids Room"));
             Landing.AddExit(Direction.Up, new Location("Attic"));
+         
 
         }
+        static public Location RandomExit(Location name) { return new Location("ты че, ты кто тебе что надо то от меня"); } //stub
+
+        static public Location GetLocationByName(String name) { return new Location("ты че, ты кто тебе что надо то от меня"); } //stub
        static public  Location Entry {  get; private set; }//contains a reference to the Entry location
 
 //        It will create a separate Location object for

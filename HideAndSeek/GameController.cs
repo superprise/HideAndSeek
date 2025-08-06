@@ -62,7 +62,14 @@ namespace HideAndSeek
         /// <param name="input">Input to parse</param>
         /// <returns>The results of parsing the input</returns>
         public string ParseInput(string input)
-        {
+        { 
+            if (!string.IsNullOrEmpty(input))
+            {
+                
+                 input = char.ToUpper(input[0]) + input.Substring(1);
+                
+            }
+
             if (Enum.TryParse(input, out Direction result))
             {
 
@@ -83,9 +90,11 @@ namespace HideAndSeek
                 }
                 else return "There's no exit in that direction";
             }
-            else { return "That's not a valid direction"; }
+            else {
+                return "That's not a valid direction"; 
+            }
             
-            return CurrentLocation.ToString();
+            //return CurrentLocation.ToString();
         }
     }
 }
