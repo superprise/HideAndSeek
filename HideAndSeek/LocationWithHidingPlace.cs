@@ -20,6 +20,6 @@ namespace HideAndSeek
         public String HidingPlace
         
         ;
-       public IEnumerable<Location> CheckHidingPlace() { return new List<Location>(); }
+       public IEnumerable<Opponent> CheckHidingPlace() { return new List<Opponent>(); }
     }
 }

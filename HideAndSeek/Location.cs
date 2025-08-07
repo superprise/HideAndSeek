@@ -45,14 +45,16 @@ namespace HideAndSeek
         public void AddExit(Direction direction, Location connectingLocation)
         {
             Exits.Add((Direction)((int)direction), connectingLocation);
-
-           connectingLocation. AddReturnExit(direction, this  );
+            connectingLocation. AddReturnExit(direction, this);
+            if(!House._locations.ContainsKey(connectingLocation.Name))
+            House._locations.Add(connectingLocation.Name, connectingLocation); //заполняет словарь для get location by name
+  
 
 
             //Debug.Write("ок "+ direction.ToString() +" "+ connectingLocation );
-           
             //Debug.WriteLine(ExitList.Count());
             //}
+
         }
         private void AddReturnExit(Direction direction, Location connectingLocation) =>
  Exits.Add((Direction)(-(int)direction), connectingLocation);
