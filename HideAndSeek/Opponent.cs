@@ -13,7 +13,7 @@ namespace HideAndSeek
         public override string ToString() => Name;
         public void Hide()
         {
-            throw new NotImplementedException();//stub
+            тут надо смотреть стр 23
         }
     }
 }

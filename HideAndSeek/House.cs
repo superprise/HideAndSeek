@@ -17,27 +17,26 @@ namespace HideAndSeek
             
             Location Hallway=new Location("Hallway");
             Location Landing = new Location("Landing");
-            Location MasterBedroom = new Location("Master Bedroom");
+            Location MasterBedroom = new LocationWithHidingPlace("Master Bedroom","under the bed");
             Entry = new Location("Entry");
-            Entry.AddExit(Direction.Out, new Location("Garage"));//
+            Entry.AddExit(Direction.Out, new LocationWithHidingPlace("Garage","in the car"));//
             Entry.AddExit(Direction.East,Hallway );//
-            Hallway.AddExit(Direction.North, new Location("Bathroom"));//
-            Hallway.AddExit(Direction.Northwest, new Location("Kitchen"));//
-            Hallway.AddExit(Direction.South, new Location("Living Room"));//
+            Hallway.AddExit(Direction.North, new LocationWithHidingPlace("Bathroom","in the basin" ));//
+            Hallway.AddExit(Direction.Northwest, new LocationWithHidingPlace("Kitchen", "in the cupboard"));//
+            Hallway.AddExit(Direction.South, new LocationWithHidingPlace("Living Room", "under the sofa"));//
+            Landing.AddExit(Direction.Up, new LocationWithHidingPlace("Attic","in old cardbox"));//
             Hallway.AddExit(Direction.Up, Landing);//
+            Landing.AddExit(Direction.Southeast, new LocationWithHidingPlace("Kids Room", "in the closet"));//
             Landing.AddExit(Direction.Northwest, MasterBedroom);//
-            MasterBedroom.AddExit(Direction.East,new Location("Master Bath"));//
-            Landing.AddExit(Direction.West, new Location("Second Bathroom"));//
-            Landing.AddExit(Direction.Southwest, new Location("Nursery"));//
-            Landing.AddExit(Direction.South, new Location("Pantry"));//
-            Landing.AddExit(Direction.Southeast, new Location("Kids Room"));//
-            Landing.AddExit(Direction.Up, new Location("Attic"));//
-         
+            Landing.AddExit(Direction.Southwest, new LocationWithHidingPlace("Nursery", "in the cot"));//
+            Landing.AddExit(Direction.South, new LocationWithHidingPlace("Pantry", "under the pile of durty underwears"));//
+            Landing.AddExit(Direction.West, new LocationWithHidingPlace("Second Bathroom", "under the toilet"));//                                                        //    
+            MasterBedroom.AddExit(Direction.East,new LocationWithHidingPlace("Master Bath","in the basin"));//
 
         }
-        static public Location RandomExit(Location name) { 
+        static public Location RandomExit(Location name) {
             
-            return new Location("ты че, ты кто тебе что надо то от меня"); 
+            return  name.Exits.ElementAt(Random.Next(0, name.Exits.Count)).Value;
         
         
         } //stub
@@ -51,7 +50,15 @@ namespace HideAndSeek
 
         public static void ClearHidingPlaces()
         {
-            throw new NotImplementedException();
+            var op = from item in _locations 
+                     where item.Value.GetType() == typeof(LocationWithHidingPlace) 
+                     select item.Value as LocationWithHidingPlace;
+
+            foreach (var item in op)
+           
+            {
+           item.CheckHidingPlace();
+            }
         }
 
         static public  Location Entry {  get; private set; }//contains a reference to the Entry location
