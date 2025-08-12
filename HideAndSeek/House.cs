@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,7 @@ namespace HideAndSeek
 {
     static public class House
     {
-        public static Dictionary<String, Location> _locations = new Dictionary<String, Location>();//Entry нет в справочнике, а нужна?
-        
+        public static Dictionary<String, Location> _locations = new Dictionary<String, Location>();
 
         public static Random Random;//stub
         static House()
@@ -19,6 +19,7 @@ namespace HideAndSeek
             Location Landing = new Location("Landing");
             Location MasterBedroom = new LocationWithHidingPlace("Master Bedroom","under the bed");
             Entry = new Location("Entry");
+            _locations.Add("Entry", Entry);
             Entry.AddExit(Direction.Out, new LocationWithHidingPlace("Garage","in the car"));//
             Entry.AddExit(Direction.East,Hallway );//
             Hallway.AddExit(Direction.North, new LocationWithHidingPlace("Bathroom","in the basin" ));//
@@ -35,10 +36,10 @@ namespace HideAndSeek
 
         }
         static public Location RandomExit(Location name) {
-            
-            return  name.Exits.ElementAt(Random.Next(0, name.Exits.Count)).Value;
-        
-        
+            int ran = Random.Next(0, name.Exits.Count);
+            return  name.Exits.ElementAt(ran).Value;
+            Debug.Write(Environment.NewLine+"got " + ran+ Environment.NewLine);
+
         } //stub
 
         static public Location GetLocationByName(String name) {
@@ -63,7 +64,7 @@ namespace HideAndSeek
 
         static public  Location Entry {  get; private set; }//contains a reference to the Entry location
 
-//        It will create a separate Location object for
+//       It will create a separate Location object for
 //each room in the house, using their AddExit methods to link them together.
 
 

@@ -103,6 +103,19 @@ namespace HideAndSeekTests
             Assert.AreEqual(0, garage.CheckHidingPlace().Count());
             Assert.AreEqual(0, attic.CheckHidingPlace().Count());
         }
+        [TestMethod]
+        public void TestOpponentHide()
+        {
+            var opponent1 = new Opponent("opponent1");
+            Assert.AreEqual("opponent1", opponent1.Name);
+           // House.Random = new Random();
+            House.Random = new MockRandom() { ValueToReturn = 0};
+            opponent1.Hide();
+            var bathroom = House.GetLocationByName("Bathroom") as LocationWithHidingPlace;
+            var garage = House.GetLocationByName("Garage") as LocationWithHidingPlace;
+            CollectionAssert.AreEqual(new[] { opponent1 }, garage.CheckHidingPlace().ToList());
+
+        }
 
     }
 }
