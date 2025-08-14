@@ -22,13 +22,13 @@ namespace HideAndSeek
             for (int i = 0; i < random.Next(0, 50); i++)
             {
             loc = House.RandomExit(loc);
-            Debug.Write(i+". go to " + loc.Name+Environment.NewLine );
+            //Debug.Write(i+". go to " + loc.Name+Environment.NewLine );
             }
             }
           
             locW = (LocationWithHidingPlace)loc;
             locW.Hide(this);
-           Debug.Write(Environment.NewLine+" stop to " + loc.Name+ Environment.NewLine + Environment.NewLine + Environment.NewLine);
+           //Debug.Write(Environment.NewLine+" stop to " + loc.Name+ Environment.NewLine + Environment.NewLine + Environment.NewLine);
 
  System.Diagnostics.Debug.WriteLine($" {Name} is hiding " +
 $"{(locW as LocationWithHidingPlace).HidingPlace} in the {loc.Name}");

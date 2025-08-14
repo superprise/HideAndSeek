@@ -11,7 +11,7 @@ namespace HideAndSeek
     {
         public static Dictionary<String, Location> _locations = new Dictionary<String, Location>();
 
-        public static Random Random;//stub
+        public static Random Random =new Random();//stub
         static House()
         {
             
@@ -22,10 +22,10 @@ namespace HideAndSeek
             _locations.Add("Entry", Entry);
             Entry.AddExit(Direction.Out, new LocationWithHidingPlace("Garage","in the car"));//
             Entry.AddExit(Direction.East,Hallway );//
-            Hallway.AddExit(Direction.North, new LocationWithHidingPlace("Bathroom","in the basin" ));//
-            Hallway.AddExit(Direction.Northwest, new LocationWithHidingPlace("Kitchen", "in the cupboard"));//
-            Hallway.AddExit(Direction.South, new LocationWithHidingPlace("Living Room", "under the sofa"));//
-            Landing.AddExit(Direction.Up, new LocationWithHidingPlace("Attic","in old cardbox"));//
+            Hallway.AddExit(Direction.North, new LocationWithHidingPlace("Bathroom", "behind the door"));//
+            Hallway.AddExit(Direction.Northwest, new LocationWithHidingPlace("Kitchen", "next to the stove"));//
+            Hallway.AddExit(Direction.South, new LocationWithHidingPlace("Living Room", "behind the sofa"));//
+            Landing.AddExit(Direction.Up, new LocationWithHidingPlace("Attic", "in a trunk"));//
             Hallway.AddExit(Direction.Up, Landing);//
             Landing.AddExit(Direction.Southeast, new LocationWithHidingPlace("Kids Room", "in the closet"));//
             Landing.AddExit(Direction.Northwest, MasterBedroom);//
@@ -36,6 +36,7 @@ namespace HideAndSeek
 
         }
         static public Location RandomExit(Location name) {
+            //Random = new Random();
             int ran = Random.Next(0, name.Exits.Count);
             return  name.Exits.ElementAt(ran).Value;
             Debug.Write(Environment.NewLine+"got " + ran+ Environment.NewLine);
